@@ -1,0 +1,10 @@
+{
+  "name": "fake-terminal",
+  "usage": "<fake-terminal>$ </fake-terminal>",
+  "description": "An extensible pseudo-terminal web component for your website (or whatever you do in the browser), based on terminal.js.",
+  "links": {
+    "demo": "https://avgp.github.io/fake-terminal/index.html",
+    "repository": "https://github.com/avgp/fake-terminal",
+    "documentation": "https://github.com/AVGP/fake-terminal/blob/gh-pages/README.md"
+  }
+}
