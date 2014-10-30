@@ -11,8 +11,8 @@
 </template>
 <script src="terminal.js"></script>
 <script>
-  var FakeTerminal = undefined, currentScript = document.currentScript;
-  (function() {
+  var FakeTerminal = undefined;
+  (function(currentScript) {
 
     var elemPrototype = Object.create(HTMLElement.prototype);
     Object.defineProperty(elemPrototype, "commands", { 
@@ -39,5 +39,5 @@
     };
 
     FakeTerminal = document.registerElement("fake-terminal", { prototype: elemPrototype });
-  }());
+  }(document._currentScript || document.currentScript));
 </script>
