@@ -154,9 +154,15 @@
     };
 
     elemPrototype.attachedCallback = function() {
-      console.log(window.Terminal, "or not")
+        this.ready = true
         this.terminal        = window.Terminal.init(this.root.getElementById("terminal"), {});
         this.terminal.prompt = this.root.querySelector("content").getDistributedNodes()[0].textContent;
+
+        if(this.onload) {
+          console.log('onload')
+          this.onload()
+        }
+
     };
 
     elemPrototype.attributeChangedCallback = function(attrName, oldVal, newVal) {
@@ -165,5 +171,5 @@
     };
 
     FakeTerminal = document.registerElement("fake-terminal", { prototype: elemPrototype });
-  }(document.currentScript || document._currentScript));
+  }(document._currentScript || document.currentScript));
 </script>

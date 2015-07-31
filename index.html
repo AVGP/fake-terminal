@@ -6,14 +6,14 @@
       body {
         background: black;
         color:      white;
-        
+
         width:  100%;
         height: 100%;
-        
+
         padding: 0;
         margin:  0;
-        
-        box-sizing: border-box;        
+
+        box-sizing: border-box;
       }
     </style>
     <script src="http://avgp.github.io/webcomponentsjs/webcomponents.min.js"></script>
@@ -23,9 +23,9 @@
     <h1>Terminal.js Demo</h1>
     <fake-terminal>guest@terminal.js &sim; &gt;</fake-terminal>
     <script>
-      var commands = {};
-      
-      commands.help = function() {
+      var cmds = {};
+
+      cmds.help = function() {
         var output = "<div>" +
                      "<ul>" +
                      "<li><strong>help</strong> - display this help.</li>" +
@@ -35,25 +35,31 @@
         return output;
       };
 
-      commands.hello = function(args) {
+      cmds.hello = function(args) {
         if(args.length < 2) return "<p>Hello. Why don't you tell me your name?</p>";
         return "Hello " + args[1];
       };
 
-      commands.weather = function(args) {
+      cmds.weather = function(args) {
         args.shift();
         var xhr = new XMLHttpRequest();
         xhr.open("get", "http://api.openweathermap.org/data/2.5/weather?units=metric&q=" + args.join(" "), false);
         xhr.send();
         if(xhr.status !== 200) return "Error :(";
         weather = JSON.parse(xhr.responseText);
-        return "<p><img style=\"vertical-align: middle\" src=\"http://openweathermap.org/img/w/" + 
-               weather.weather[0].icon + ".png\">" + 
-               weather.weather[0].description + ", " + 
+        return "<p><img style=\"vertical-align: middle\" src=\"http://openweathermap.org/img/w/" +
+               weather.weather[0].icon + ".png\">" +
+               weather.weather[0].description + ", " +
                weather.main.temp + " &deg;C</p>"
       };
 
-      document.querySelector("fake-terminal").commands = commands;
+      var terminal = document.querySelector("fake-terminal");
+      if(terminal.ready) terminal.commands = cmds
+      else {
+        document.querySelector("fake-terminal").onload = function() {
+          this.commands = cmds;
+        }
+      }
     </script>
   </body>
 </html>

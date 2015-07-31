@@ -6,7 +6,7 @@
 */
 fake-terminal::shadow #terminal {
     font-family: 'VT323', cursive;
-    width:       100%; 
+    width:       100%;
     height:      100%;
 }
 
@@ -14,6 +14,14 @@ fake-terminal::shadow #terminal {
 * The input span where the input happens.
 * Also applied to the previous inputs made in the current session.
 */
+#terminal .input {
+    min-width: 1em;
+    height: 1em;
+    display:inline-block;
+    border: none;
+    outline-color: transparent;
+}
+
 fake-terminal::shadow #terminal .input {
     height:         1em;
     min-width:      1em;

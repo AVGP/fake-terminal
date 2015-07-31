@@ -60,9 +60,17 @@ Now we can make our terminal:
     <body>
       <fake-terminal id="myterm">guest@terminal.js &sim; &gt;</fake-terminal>
       <script>
-        var cmds = {};
+        var cmds = {}, terminal = document.getElementById("myterm");
         cmds.hello = function(args) { return "<h1>Hello, " + (args[1] || "unknown") + "</h1>"; };
-        document.getElementById("myterm").commands = cmds;
+        if(terminal.ready) {
+          // the native web components implementation was faster :-)
+          terminal.commands = cmds
+        } else {
+          // the polyfill needs some more time..
+          terminal.onload = function() {
+            this.commands = cmds;
+          }
+        }
       </script>
     </body>
   </html>
