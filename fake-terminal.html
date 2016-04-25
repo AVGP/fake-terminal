@@ -40,6 +40,11 @@
           terminal.innerHTML += (self.commands[cmd](args));
       };
 
+      var runError = function(terminal, cmd, args) {
+          var message = "ft: " + cmd + ": command not found..." 
+          terminal.innerHTML += message;
+      };
+
       var updateHistory = function(cmd) {
           history.push(cmd);
           try {
@@ -121,6 +126,8 @@
               var input = prompt.textContent.split(" ");
               if(input[0] && input[0] in self.commands) {
                   runCommand(elem, input[0], input);
+              } else if(input[0] && input[0] != '') {
+                  runError(elem, input[0], input);
               }
 
               resetPrompt(elem, prompt);
